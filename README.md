@@ -8,6 +8,11 @@
 In this project, I created a pair of synthetic datasets using Python to simulate **county-level economic and gender-related data** for 2024.
 The goal was to build a dataset that mirrors the structure of the **PREDOC pollution–mortality exercise**, but focused on **gender gaps and education effects in economics**.
 
+I have created a data structure that is a panel with:
+
+**Cross-sectional units** : County × Gender combinations (58 counties × 2 genders = 116 panels)
+**Time dimension**: Daily observations throughout 2024 (366 days)
+
 This project demonstrates skills in:
 
 * Data cleaning and merging

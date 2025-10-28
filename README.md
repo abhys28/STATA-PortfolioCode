@@ -20,7 +20,7 @@ This project demonstrates skills in:
 
 ## **Files**
 
-###  `synthetic-data-generation.ipynb`
+###  `synthetic-data-generation.ipynb` [Link](https://github.com/abhys28/STATA-PortfolioCode/blob/0fa7ff174ecaba4009a47c6191f90b0633e4081a/synthetic-data-generation.ipynb)
 
 I wrote this Python script to generate two CSV datasets:
 

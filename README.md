@@ -20,7 +20,7 @@ This project is demonstrates skills in:
 
 ## **Files**
 
-### 🧮 `generate_gender_econ_data.py`
+###  `generate_gender_econ_data.py`
 
 I wrote this Python script to generate two CSV datasets:
 
@@ -39,7 +39,7 @@ It will output the two CSV files in your current directory.
 
 ---
 
-### 📄 `county_wages_2024.csv`
+###  `county_wages_2024.csv`
 
 **Unit of observation:** County × Gender × Month
 (58 counties × 12 months × 2 genders = 1,392 rows)
@@ -65,7 +65,7 @@ It will output the two CSV files in your current directory.
 
 ---
 
-### 🎓 `county_education_2024.csv`
+###  `county_education_2024.csv`
 
 **Unit of observation:** County (58 rows)
 
@@ -91,17 +91,17 @@ I created county-level characteristics that vary realistically by region:
 
 ## **Analytical Design**
 
-### 🎯 Gender Effect
+###  Gender Effect
 
 I built in a **gender wage gap of about $3/hour**, which allows for clear analysis of gender differences in labor market outcomes.
 
-### 🎓 Education Effect
+###  Education Effect
 
 Education contributes **$0.8/hour per extra year of average schooling**.
 This is based on the **Mincer equation**, which suggests that each additional year of education produces an individual a rate of return to schooling of about 5–8% per year, ranging from a low of 1% to more than 20% in some countries. Check References [2] Hence, here I assume that counties with more educated populations have slightly higher wages, roughly +$0.8 per additional year of average schooling above 12.
 
 
-### ⚙️ Randomization
+###  Randomization
 
 I added small random shocks to wages, hours, and employment to make the dataset more natural and ensure no perfect patterns.
 

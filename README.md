@@ -1,7 +1,7 @@
 # STATA-PortfolioCode
 
 
-# 📘 README – Gender and Labor Data Task
+# README – Gender and Labor Data Task
 
 ### **Overview**
 

@@ -36,7 +36,7 @@
 // used as in-line comments and answers to tasks
 * used as section dividers and headers
 
-*Installing necessary softwares
+*Installing necessary packages
 
 *ssc install egenmore
 *ssc install nvals
@@ -152,6 +152,7 @@ gen gencode = (gender == "Male")
 reghdfe wage gencode, absorb(county_code datevar)
 
 // ß1 = 3.025 and significant
+
 
 
 

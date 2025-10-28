@@ -5,7 +5,7 @@
 ***PURPOSE:
 
 *I built this dataset and documentation as part of a project to simulate real-world economic data tasks like those used 
-*in PREDOC and research assistant applications and data analysis training. It’s meant to demonstrate my experience working with data
+*in PREDOC and research assistant applications and data analysis training. Itâ€™s meant to demonstrate my experience working with data
 * cleaning, visualization and analysis.
 
 ***TABLE OF CONTENTS:
@@ -46,7 +46,7 @@
 
 clear
 set more off
-cd "C:\Users\lubi\Desktop\Abhi's Desktop\Learning\Coding and econometrics\STATA_Practice\PREDOC 2025\Portfolio"
+cd "Your Path" \\Add your directory
 
 
 import delimited "county_education_2024.csv", clear
@@ -144,13 +144,14 @@ restore
 ********SECTION 3: Analysis - Gender, Education, and Wages******************
 
 *QUES 1: Estimate the association between wages and gender by running the following regression:
-* Wagesit = ß0 + ß1Genderit +ai +at
-*where ai and at are fixed effects for county i and time t. Report and interpret ß1.
+* Wagesit = ÃŸ0 + ÃŸ1Genderit +ai +at
+*where ai and at are fixed effects for county i and time t. Report and interpret ÃŸ1.
 
 //Destringing gender variable
 gen gencode = (gender == "Male")
 reghdfe wage gencode, absorb(county_code datevar)
 
-// ß1 = 3.025 and significant
+// ÃŸ1 = 3.025 and significant
+
 
 

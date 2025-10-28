@@ -58,14 +58,12 @@ save "county_wa.dta", replace
 
 ******SECTION 1: Data Processing and Summarizing *******************************
 
-******QUES 1: Merge the two datasets using county_code as the key. Describe how you handled missing values or duplicates.
+******QUES 1: Merge the two datasets using county_code as the key. 
 
 //Inputting the first dataset for investigation
 
 use "county_edu.dta", clear
 desc
-misstable summ
-
 
 //Inputting the second dataset for investigation
 use "county_wa.dta", clear
@@ -76,23 +74,18 @@ gen datevar = date(date, "YMD")
 format datevar %td
 save "county_wa.dta", replace
 
-//Creating a unique id for each obersvation for better analysis
-egen uid = group(county_code date gender)
-order uid county_code county_name date gender wage hours employment_rate population urban datevar
-sort uid
-
 //Merging
 merge m:1 county_code using "county_edu.dta", assert(match) 
  //The assert here is KEY because it ensures that each observation in the master dataset matches with the counterpart in the using dataset
  //If not the code is broken 
  
 drop date _merge //Cleaning at every step
+
 export excel using "merged", firstrow(variables) replace
 
 *QUES  2. Produce a table with the mean, median, min, max, and standard deviation for:Wage, Hours worked and Employment rate
 
 tabstat wage hours employment_rate, columns(statistics) statistics(me med mi max sd ) // mean, median, minimum, maximum, and standard deviation
-*esttab using "summ.csv", replace title("Summary Stats")
 
 *QUES 3. Produce a table with the same statistics for wages, but split by gender. Include the number of observations in each group.
 
@@ -125,7 +118,6 @@ twoway (kdensity wage if gender=="Male", lcolor(navy)) ///
 graph export "WageDistribution.png", replace
 	   
 *QUES 2: Create a time series plot showing the average wage for women in any one county across 2024.
-*Do you observe persistent gaps or convergence?
 
 preserve
 
@@ -152,6 +144,7 @@ gen gencode = (gender == "Male")
 reghdfe wage gencode, absorb(county_code datevar)
 
 // ß1 = 3.025 and significant
+
 
 
 

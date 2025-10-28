@@ -5,10 +5,10 @@
 
 ### **Overview**
 
-In this project, I created a pair of synthetic datasets and a Python script to simulate **county-level economic and gender-related data** for 2024.
+In this project, I created a pair of synthetic datasets using Python to simulate **county-level economic and gender-related data** for 2024.
 The goal was to build a dataset that mirrors the structure of the **PREDOC pollution–mortality exercise**, but focused on **gender gaps and education effects in economics**.
 
-This project is demonstrates skills in:
+This project demonstrates skills in:
 
 * Data cleaning and merging
 * Generating and summarizing statistics
@@ -20,109 +20,126 @@ This project is demonstrates skills in:
 
 ## **Files**
 
-###  `generate_gender_econ_data.py`
+###  `synthetic-data-generation.ipynb`
 
 I wrote this Python script to generate two CSV datasets:
 
 * `county_wages_2024.csv`
 * `county_education_2024.csv`
 
-Each dataset captures realistic variation in wages, education, and demographics across **58 California counties** for **12 months in 2024**.
+Each dataset captures realistic variation in wages, education, and demographics across **58 California counties** in 2024.
 
 To run the script:
 
 ```bash
-python generate_gender_econ_data.py
+jupyter notebook synthetic-data-generation.ipynb
 ```
 
 It will output the two CSV files in your current directory.
 
 ---
 
-###  `county_wages_2024.csv`
+## **Dataset Descriptions**
 
-**Unit of observation:** County × Gender × Month
-(58 counties × 12 months × 2 genders = 1,392 rows)
+### 1. `county_wages_2024.csv`
 
-| Variable          | Description                              |
-| ----------------- | ---------------------------------------- |
-| `county_code`     | Numeric county identifier                |
-| `county_name`     | County name                              |
-| `date`            | Month (YYYY-MM-DD)                       |
-| `gender`          | Male or Female                           |
-| `wage`            | Average hourly wage (USD)                |
-| `hours`           | Average weekly hours worked              |
-| `employment_rate` | Share of working-age population employed |
-| `population`      | County population                        |
-| `urban`           | 1 = Urban county, 0 = Rural county       |
+**Daily-level panel data** with 42,394 observations (intentionally incomplete for cleaning practice).
 
-#### How I generated this:
+| Column | Description |
+|--------|-------------|
+| `county_code` | Numeric identifier (1-58) |
+| `county_name` | County name (County_1, County_2, ...) |
+| `date` | Date in YYYY-MM-DD format |
+| `gender` | Male or Female |
+| `wage` | Average hourly wage (USD) |
+| `hours` | Average hours worked per week |
+| `employment_rate` | Employment rate (0-1) |
+| `population` | County population |
+| `urban` | Binary indicator: 1 = urban, 0 = rural |
 
-* I started with a **base wage** around $30/hour.
-* I applied a **gender effect**, where females earn $3/hour less on average.
-* I added an **education effect**: for every extra year of average schooling in a county, wages rise by **$0.8/hour**.
-* I included random noise to make the data more realistic, with some seasonal and urban–rural variation.
+**Expected structure:** 58 counties × 366 days (2024 is a leap year) × 2 genders = 42,504 rows  
+**Actual rows:** 42,394 (missing one full month for one county)
 
----
+**Key features:**
+- **Gender wage gap**: Women earn approximately $3 less per hour than men on average
+- **Missing data**: One randomly selected county is missing an entire month of data
+- **Daily granularity**: Allows for time-series analysis practice
 
-###  `county_education_2024.csv`
+### 2. `county_education_2024.csv`
 
-**Unit of observation:** County (58 rows)
+**County-level cross-sectional data** with 58 observations.
 
-| Variable        | Description                          |
-| --------------- | ------------------------------------ |
-| `county_code`   | Numeric county identifier            |
-| `county_name`   | County name                          |
-| `region`        | Region (North, Central, South)       |
-| `urban`         | 1 = Urban, 0 = Rural                 |
-| `education_avg` | Average years of schooling           |
-| `college_share` | Share of adults with college degrees |
-| `median_income` | Median household income (USD)        |
+| Column | Description |
+|--------|-------------|
+| `county_code` | Numeric identifier (1-58) |
+| `county_name` | County name |
+| `region` | Geographic region (North, Central, South) |
+| `urban` | Binary indicator: 1 = urban, 0 = rural |
+| `education_avg` | Average years of education |
+| `college_share` | Share of population with college degree (0-1) |
+| `median_income` | Median household income (USD) |
 
-#### How I generated this:
-
-I created county-level characteristics that vary realistically by region:
-
-* Urban counties have higher education and income levels.
-* Rural counties have lower education levels but more employment volatility.
-* Education ranges roughly from 11 to 16 years on average, with corresponding changes in median income.
 
 ---
 
-## **Analytical Design**
+## **Data Generation Logic**
 
-###  Gender Effect
+### Wage Determination
 
-I built in a **gender wage gap of about $3/hour**, which allows for clear analysis of gender differences in labor market outcomes.
+The synthetic wage is calculated using the following formula:
 
-###  Education Effect
+```
+wage = base_wage + gender_effect + education_effect + random_noise
+```
+
+Where:
+- **Base wage**: ~$30/hour (with variation)
+- **Gender effect**: -$3 for women (based on literature [1])
+- ###  Education Effect
 
 Education contributes **$0.8/hour per extra year of average schooling**.
 This is based on the **Mincer equation**, which suggests that each additional year of education produces an individual a rate of return to schooling of about 5–8% per year, ranging from a low of 1% to more than 20% in some countries. Check References [2] Hence, here I assume that counties with more educated populations have slightly higher wages, roughly +$0.8 per additional year of average schooling above 12.
-
-
-###  Randomization
-
+- **Random noise**: Adds realistic individual-level variation
 I added small random shocks to wages, hours, and employment to make the dataset more natural and ensure no perfect patterns.
 
 ---
 
-## **Dependencies**
+### Missing Data Pattern
 
-I used:
-
-* Python ≥ 3.8
-* pandas
-* numpy
-
-Install them with:
-
-```bash
-pip install pandas numpy
-```
+To simulate real-world data issues:
+- One random county is missing an entire month of data
+- This creates an opportunity to practice identifying and handling missing data in Stata or other tools
 
 ---
 
+## **Example Analysis Tasks**
+
+This dataset is used to practice STATA skills:
+
+1. **Data Cleaning**
+   - Identify the county and month with missing data
+   - Decide how to handle missing observations
+
+2. **Descriptive Statistics**
+   - Calculate average wages by gender and region
+   - Compare urban vs. rural wage patterns
+   - Summarize education levels across counties
+
+3. **Data Merging**
+   - Merge the wage and education datasets
+   - Create a panel dataset with time-varying and time-invariant variables
+
+4. **Regression Analysis**
+   - Estimate the gender wage gap controlling for education
+   - Test the returns to education
+   - Explore regional differences
+
+5. **Visualization**
+   - Plot wage trends over time
+   - Create maps showing geographic variation
+   - Visualize the relationship between education and wages
+
+---
 ## **License**
 
 This project uses fully **synthetic data** generated for educational and demonstration purposes only.

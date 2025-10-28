@@ -41,7 +41,7 @@ It will output the two CSV files in your current directory.
 
 ## **Dataset Descriptions**
 
-### 1. `county_wages_2024.csv`
+### 1. `county_wages_2024.csv` [Link] (https://github.com/abhys28/STATA-PortfolioCode/blob/f4d43726432b58cad22d93d080ae420bd0438628/county_education_2024.csv)
 
 **Daily-level panel data** with 42,394 observations (intentionally incomplete for cleaning practice).
 
@@ -65,7 +65,7 @@ It will output the two CSV files in your current directory.
 - **Missing data**: One randomly selected county is missing an entire month of data
 - **Daily granularity**: Allows for time-series analysis practice
 
-### 2. `county_education_2024.csv`
+### 2. `county_education_2024.csv` [Link] (https://github.com/abhys28/STATA-PortfolioCode/blob/f4d43726432b58cad22d93d080ae420bd0438628/county_wages_2024.csv)
 
 **County-level cross-sectional data** with 58 observations.
 

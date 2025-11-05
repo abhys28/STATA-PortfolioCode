@@ -117,32 +117,44 @@ To simulate real-world data issues:
 
 ---
 
-## **Example Analysis Tasks**
+## **Stata Do-File Overview**
 
-This dataset is used to practice STATA skills:
+### [`master_analysis.do`](https://github.com/abhys28/STATA-PortfolioCode/blob/main/master_analysis.do)
 
-1. **Data Cleaning**
-   - Identify the county and month with missing data
-   - Decide how to handle missing observations
+This is the **core Stata script** demonstrating my data cleaning, visualization, and econometric analysis workflow. It reproduces the kinds of empirical tasks common in **RA and pre-doc assignments**.
 
-2. **Descriptive Statistics**
-   - Calculate average wages by gender and region
-   - Compare urban vs. rural wage patterns
-   - Summarize education levels across counties
+#### **Structure & Sections**
 
-3. **Data Merging**
-   - Merge the wage and education datasets
-   - Create a panel dataset with time-varying and time-invariant variables
+1. **Data Processing and Summarizing**
 
-4. **Regression Analysis**
-   - Estimate the gender wage gap controlling for education
-   - Test the returns to education
-   - Explore regional differences
+   * Imports and saves raw CSVs as `.dta` files
+   * Merges the wage and education datasets using `county_code`
+   * Converts date formats, checks for missing data, and produces summary statistics
 
-5. **Visualization**
-   - Plot wage trends over time
-   - Create maps showing geographic variation
-   - Visualize the relationship between education and wages
+2. **Visualizing the Data**
+
+   * Creates **kernel density plots** of wages by gender
+   * Produces **time series plots** of female wages over 2024 for a selected county
+   * Exports publication-ready `.png` graphs
+
+3. **Analysis: Gender, Education, and Wages**
+
+   * Runs regressions of wages on gender with **county and time fixed effects** using `reghdfe`
+   * Interprets the estimated gender wage gap (`β₁ ≈ -3.0`)
+   * Demonstrates use of Stata’s high-dimensional FE tools (`ftools`, `reghdfe`)
+
+#### **Outputs**
+
+* Cleaned datasets (`.dta`), merged Excel file (`merged.xlsx`)
+* Visualizations (`WageDistribution.png`, `AverageWageWomen.png`)
+* Regression results output to the console
+
+#### **Skills Demonstrated**
+
+* Efficient **data cleaning** and **merging**
+* Advanced **panel data management**
+* Use of **visualization** and **fixed-effects regression tools**
+* Reproducible workflow design
 
 ---
 ## **License**

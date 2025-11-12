@@ -39,7 +39,6 @@
 *Installing necessary packages
 
 *ssc install egenmore
-*ssc install nvals
 *ssc install unique
 *ssc install reghdfe
 *ssc install ftools
@@ -144,6 +143,7 @@ gen gencode = (gender == "Male")
 reghdfe wage gencode, absorb(county_code datevar)
 
 // ß1 = 3.025 and significant
+
 
 
 

@@ -46,7 +46,7 @@
 
 clear
 set more off
-cd "Your Path" \\Add your directory
+cd "Your Path" //Add your directory
 
 
 import delimited "county_education_2024.csv", clear
@@ -144,6 +144,7 @@ gen gencode = (gender == "Male")
 reghdfe wage gencode, absorb(county_code datevar)
 
 // ß1 = 3.025 and significant
+
 
 
 
